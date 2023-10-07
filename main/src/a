@@ -1,0 +1,118 @@
+public class TextBasedGame {
+
+    public static void main(String[] args) {
+        public int ammo;
+        public double health;
+        public int weapon = 0; //weapon 1 = Tokarev, 2 = Mosin-Nagant M1891 3 = PPSh-41
+        public int experience;
+        boolean introFinished = false;
+        boolean crossedVolga = false;
+        boolean SASF = false;
+        boolean dead = false;
+
+        while (!dead) {
+            if (!introFinished && !dead) {introFinished = intro(0);}
+            if (!crossedVolga && !dead) {
+                crossedVolga = crossingVolga(0);
+            }
+            if (volgaChances < 0.10 && v == 1) {
+                System.out.println("The Germans suddenly opened fire. Before you knew it, the gunboat went up in flames.");
+                dead = true;
+            }
+            else if (volgaChances < 0.10 && v == 2) {
+                System.out.println("The Germans suddenly opened fire. Before you knew it, the barque went up in flames.");
+                dead = true;
+            }
+            else if (volgaChances >= 0.1 && v == 1) {
+                System.out.println("German machine guns and artillery opened fire from the opposite bank. \n" +
+                        "Columns of water was thrown up, and the silver bellies of the fish appeared on the surface. \n" +
+                        "The gunboat fired back occasionally. The scene of Stalingrad was more like an image of hell.\n" +
+                        "Huge flames waved at you from charred buildings, black smoke ascending even higher. \n" +
+                        "The gunboat landed. Without much thought, you quickly disembarked onto the shore, dodging bullets from all sides.");
+                System.out.println("(Achievement Unlocked: The Stalingrad Academy of Street Fighting)");
+                SASF = true;
+                System.out.println("Press 1 to Continue:");
+                while (a <= 0 || a > 1) {
+                    try {
+                        a = Integer.parseInt(intro.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+            }
+            else if (volgaChances >= 0.1 && v == 1) {
+                System.out.println("German machine guns and artillery opened fire from the opposite bank. \n" +
+                        "Columns of water was thrown up, and the silver bellies of the fish appeared on the surface. \n" +
+                        "The mast of the barque is riddled with bullets. The scene of Stalingrad was more like an image of hell.\n" +
+                        "Huge flames waved at you from charred buildings, black smoke ascending even higher. \n" +
+                        "The barque landed. Without much thought, you quickly disembarked onto the shore, dodging bullets from all sides.");
+                System.out.println("(Achievement Unlocked: The Stalingrad Academy of Street Fighting)");
+                experience++;
+                SASF = true;
+                System.out.println("Press 1 to Continue:");
+                while (a <= 0 || a > 1) {
+                    try {
+                        a = Integer.parseInt(intro.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    public static boolean intro(int a) {
+        Scanner intro = new Scanner(System.in);
+        System.out.println("You are Ivan, a soldier in the glorious Red Army. " +
+                "\nYou belong to the 13th Guards Rifle Division, commanded by Rodimtsev." +
+                "\nThe Division is to cross the Volga on the 13th of September.");
+        System.out.println("Press 1 to Continue:");
+        while (a <= 0 || a > 1) {
+            try {
+                a = Integer.parseInt(intro.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number");
+            }
+        }
+        if (a = 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean crossingVolga(int v) {
+        Scanner intro = new Scanner(System.in);
+        System.out.println("It is the 13th of September, and darkness has not yet completely fallen." +
+                "\nYou have finally been issued with a Tokarev TT-33, 20 rounds of 7.62 ammunition, some bread and sausages. Unfortunately no vodka." +
+                "\n(Obtained New Weapon: Tokarev TT-33)\n" +
+                "(Obtained Ammunition: 20 rounds)" +
+                "\nAfter several round trips, it is finally your turn to rush from the river bank to one of the boats.\n" +
+                "Amongst the chaos, you lost your detachment.\n" +
+                "Will you board a gunboat from the Volga Floatilla, or a commandeered fishing barque?\n" +
+                "(Option 1: Board the gunboat. [Press 1])\n" +
+                "(Option 2: Board the fishing barque. [Press 2])");
+        weapon = 1;
+        ammo = 20;
+        while (v <= 0 || v > 2) {
+            try {
+                v = Integer.parseInt(intro.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number");
+            }
+        }
+        if (v == 1) {
+            System.out.println("You managed to get on one of the gunboats. Its riveted armour gives some sense of protection.");
+            double volgaChances = Math.random()-0.1;
+        }
+        else if (v == 2) {
+            System.out.println("You get onto one of the inconspicuous barques. Its modest mast and deck reeks of fish.");
+            double volgaChances = Math.random();
+        }
+        if (v == 1 || v == 2) {
+            return true;
+        }
+        return false;
+    }
+}
